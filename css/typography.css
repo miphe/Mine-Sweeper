@@ -1,0 +1,209 @@
+/*
+	Author André Drougge, 2013
+	- typography (based on typeplate: https://github.com/typePlate/typeplate.github.com)
+*/
+
+/* -------------------------------------------------------------------------*/
+/* Typography */
+
+@charset "UTF-8";
+
+/*
+	Base Type
+*/
+html {
+	font: normal 112.5%/1.65 serif;
+}
+
+body {
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	word-wrap: break-word;
+	color: #444444;
+	font-family: "lucida grande" helvetica sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-rendering: optimizeLegibility;
+	line-height: 1;
+	margin-top: 0;
+	font-weight: normal;
+}
+
+
+h1 {
+	font-size: 2em;
+	margin-bottom: 0.495rem;
+}
+
+h2 {
+	font-size: 1.8em;
+	margin-bottom: 0.61875rem;
+}
+
+h3 {
+	font-size: 1.6em;
+	margin-bottom: 0.825rem;
+}
+
+h4 {
+	font-size: 1.4em;
+	margin-bottom: 1.2375rem;
+}
+
+h5 {
+	font-size: 1.2em;
+	margin-bottom: 1.41429rem;
+}
+
+h6 {
+	font-size: 1.2em;
+	margin-bottom: 1.65rem;
+}
+
+/*
+	Hyphens
+*/
+abbr,
+acronym,
+blockquote,
+code,
+dir,
+kbd,
+listing,
+plaintext,
+q,
+samp,
+tt,
+var,
+xmp {
+	/* Accepted values: [ none | manual | auto ] */
+	-webkit-hyphens: none; /* Safari 5.1 thru 6, iOS 4.2 thru 6 */
+	-moz-hyphens: none; /* Firefox 16 thru 20 */
+	-ms-hyphens: none; /* IE10 */
+	-o-hyphens: none;	 /* PRESTO...haha LOL */
+	hyphens: none;	 /* W3C standard */
+}
+
+/*
+	Paragraphs
+*/
+
+p {
+	font-size: 1.2em;
+	margin: 0 0 1.5em;
+}
+
+p + p {
+	text-indent: 1.5em;
+	margin-top: -1.5em;
+}
+
+/*
+	Code Blocks
+*/
+
+pre code {
+	word-wrap: normal;
+	white-space: -moz-pre-wrap;
+	white-space: pre-wrap;
+}
+
+pre {
+	white-space: pre;
+}
+
+code {
+	white-space: pre;
+	font-family: monospace;
+}
+
+/*
+ * Abbreviations Markup
+ *
+	<abbr title="hyper text markup language">HMTL</abbr>
+ *
+ * Extend this object into your markup.
+ *
+*/
+abbr {
+	font-variant: small-caps;
+	font-weight: 600;
+	text-transform: lowercase;
+	color: gray;
+}
+abbr:hover {
+	cursor: help;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #222222;
+}
+
+/**
+ * Lining Definition Style Markup
+ *
+	<dl class="lining">
+		<dt><b></b></dt>
+		<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+dt,
+dd {
+	display: inline;
+	margin: 0;
+}
+dt + dt:before,
+dd + dt:before {
+	content: "\A";
+	white-space: pre;
+}
+dd + dd:before {
+	content: ", ";
+}
+dd:before {
+	content: ": ";
+	margin-left: -0.2rem;
+}
+
+/**
+ * Dictionary Definition Style Markup
+ *
+	<dl class="dictionary-style">
+		<dt><b></b></dt>
+			<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+dt {
+	display: inline;
+	counter-reset: definitions;
+}
+dt + dt:before {
+	content: ", ";
+	margin-left: -0.2rem;
+}
+dd {
+	display: block;
+	counter-increment: definitions;
+}
+dd:before {
+	content: counter(definitions, decimal) ". ";
+}

@@ -1,0 +1,25 @@
+/*
+	Author André Drougge, 2013
+	- Board styles
+*/
+
+.board {
+	font-family: courier, monospace;
+}
+
+.board td {
+	border: 1px solid #efefef;
+	padding: 10px 14px;
+}
+
+.board td:hover {
+	cursor: pointer;
+	background-color: #eaeaea;
+}
+
+.board td.safe {
+}
+
+.board td.unsafe {
+	background-color: #aaa;
+}

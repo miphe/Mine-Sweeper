@@ -1,0 +1,22 @@
+/*
+	Author André Drougge, 2013
+	- Theme (colors, non-layout styles)
+*/
+
+.box-1 {
+	background-color: #FF9500;
+	border: 1px solid #E38400;
+}
+
+.box-1 h1 {
+	color: #FFBB5C;
+}
+
+.box-2 {
+	background-color: #fafafa;
+	border: 1px solid #efefef;
+}
+
+.box-raw {
+	border: 1px solid #efefef;
+}
