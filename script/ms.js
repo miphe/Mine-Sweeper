@@ -8,7 +8,7 @@ Mi.mineSweeper = function() {
             // x, number of horizonal tiles
             // y, number of vertical tiles
 
-            this.createBoard(12, 12)
+            this.createBoard(8, 8)
             this.startGame()
         },
 
@@ -65,6 +65,7 @@ Mi.mineSweeper = function() {
             }
 
             function getAdjecentTiles(thisRow, cellIndex) {
+
                 var adjecentTiles = $()
                 var prevRow = thisRow.prev('tr')
                 var nextRow = thisRow.next('tr')
@@ -74,7 +75,20 @@ Mi.mineSweeper = function() {
                 }
 
                 function findAdjecentCells(coll, includeSelf) {
-                    result = $(coll.get(cellIndex + 1)).add(coll.get(cellIndex - 1))
+
+                    var range = coll.length
+                    var result = $()
+
+                    // Following conditions makes sure that
+                    // no cells on opposite site of board
+                    // is deemed adjecent.
+
+                    if (cellIndex + 1 < range)
+                        result = result.add(coll.get(cellIndex + 1))
+
+                    if (cellIndex > 0)
+                        result = result.add(coll.get(cellIndex - 1))
+
                     if (includeSelf)
                         result = result.add(coll.get(cellIndex))
 
@@ -105,11 +119,6 @@ Mi.mineSweeper = function() {
                 })
 
                 $(c).html(adjecentMines)
-
-                // TODO: fix bug where safe tiles
-                // considers adjecent unsafe mines
-                // that resides on opposite side
-                // of board.
             })
         },
 
