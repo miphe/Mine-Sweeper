@@ -23,3 +23,26 @@ header, footer {
 	padding: 15px;
 	margin-top: 20px;
 }
+
+.is-hidden {
+	display: none;
+}
+
+.feedback-container {
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.feedback-container.negative-message {
+	background-color: #FFBDAB;
+	color: #401000;
+}
+
+.feedback-container.positive-message {
+	background-color: #9BE8A1;
+	color: #1B6E21;
+}
+
+.feedback-container p {
+	margin: 0;
+}

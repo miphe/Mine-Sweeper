@@ -8,18 +8,43 @@
 }
 
 .board td {
-	border: 1px solid #efefef;
-	padding: 10px 14px;
+	border: 1px solid #dfdfdf;
+	vertical-align: middle;
+	text-align: center;
+	height: 40px;
+	width: 40px;
 }
 
 .board td:hover {
-	cursor: pointer;
 	background-color: #eaeaea;
 }
 
 .board td.safe {
+	color: #aaa;
 }
 
 .board td.unsafe {
+	font-weight: bold;
+	color: #AB1400;
 	background-color: #aaa;
+}
+
+.board td.hidden {
+	font-size: 0;
+	overflow: hidden;
+	text-indent: -100px;
+	color: transparent;
+	cursor: pointer;
+}
+
+.board td.culprit {
+	background-color: #FFBDAB;
+}
+
+.border-cell {
+	background-color: green;
+}
+
+.adjecent-0 {
+	background-color: brown;
 }
