@@ -35,7 +35,7 @@ Mi.mineSweeper = function() {
             // x, number of horizonal tiles
             // y, number of vertical tiles
 
-            this.createBoard(8, 8)
+            this.createBoard(4, 4)
             this.applyGameEvents()
         },
 
@@ -163,41 +163,36 @@ Mi.mineSweeper = function() {
             if (settings.numberOfMinesByTiles[tiles]) {
                 return settings.numberOfMinesByTiles[tiles]
             } else {
-                alert('Unsupported tile settings, this board will have 40% mines. Good luck!');
-                return tiles*0.4
+                alert('Unsupported tile settings, this board will have 20% mines. Good luck!');
+                return tiles*0.2
             }
                 
         },
 
         sweepAdjecent: function(c) {
             var collection = Mi.mineSweeper.getAdjecentTiles(c)
-            console.log('filtered: ')
-            console.log(collection.filter('.swept'))
-            collection = collection.filter('.swept')
-            collection.removeClass('hidden').addClass('swept')
+            collection.removeClass('hidden')
+
+            return Mi.mineSweeper.getAdjecentZeros(c)
         },
 
         getAdjecentZeros: function(c) {
-            var zeros = $()
             var collection = Mi.mineSweeper.getAdjecentTiles(c)
-            $.each(collection, function(i, cell) {
-                if ($(cell).is('td:contains("0")'))
-                    zeros = zeros.add(cell)
-            })
+            var zeros = collection.filter(':contains(0)')
+
             return zeros
         },
 
-        sweptZero: function(c) {
-            var adjecentZeros = Mi.mineSweeper.getAdjecentZeros(c)
-            adjecentZeros.addClass('adjecent-0')
-            Mi.mineSweeper.sweepAdjecent(c)
+        sweepZero: function(c) {
+            $(c).addClass('swept-0')
+            var adjecentZeros = Mi.mineSweeper.sweepAdjecent(c)
 
-            $.each(adjecentZeros, function(i, zero) {
-                var adjecentTiles = Mi.mineSweeper.getAdjecentTiles(zero)
-                //Mi.mineSweeper.sweepAdjecent(c)
-                Mi.mineSweeper.sweptZero(zero)
+            $.each(adjecentZeros, function(i, z) {
+                if ($(z).is('.swept-0'))
+                    return true
 
-                // Need to filter already swept 0:s so that there's not too much recursion.
+                $(z).addClass('swept-0')
+                Mi.mineSweeper.sweepZero(z)
             })
         },
 
@@ -205,10 +200,10 @@ Mi.mineSweeper = function() {
             $('.board').on('click', 'td.hidden', function() {
                 var c = $(this)
                 var thisBoard = c.closest('.board')
-                c.removeClass('hidden').addClass('swept')
+                c.removeClass('hidden')
 
                 if (c.is('td:contains("0")')) {
-                    Mi.mineSweeper.sweptZero(c)
+                    Mi.mineSweeper.sweepZero(c)
                 } else if (c.is('.unsafe')) { // Hit a mine?
                     c.addClass('culprit')
                     Mi.mineSweeper.failGame(thisBoard)
