@@ -20,11 +20,17 @@
             <header class="l-box box-1">
                 <h1>Mine Sweeper, by André Drougge</h1>
             </header>
+            <div id="control-panel" class="l-box box-2">
+                <input class="tiles-x" type="text" placeholder="Board size X" />
+                <input class="tiles-y" type="text" placeholder="Board size Y" />
+                <input class="mine-percentage" type="text" placeholder="% of mines" />
+                <label for="hardcore-mode">Hardcore (not yet supported)</label>
+                <input id="hardcore-mode" type="checkbox" />
+                <button id="start-game">Start game!</button>
+            </div>
             <div class="feedback-container is-hidden"></div>
             <div id="content" class="l-box box-raw">
-                <div class="board-container">
-                    <p>Loading board..</p>
-                </div>
+                <div class="board-container"></div>
             </div>
             <footer class="l-box box-2">
                 <a href="mailto:andre.drougge@gmail.com">Send me an e-mail!</a>

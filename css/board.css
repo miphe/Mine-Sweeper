@@ -26,7 +26,12 @@
 .board td.unsafe {
 	font-weight: bold;
 	color: #AB1400;
-	background-color: #aaa;
+	background-color: #FFeeee;
+}
+
+.board td.hidden.unsafe,
+.board td.hidden {
+	background-color: #fefefe;
 }
 
 .board td.hidden {
@@ -39,10 +44,6 @@
 
 .board td.culprit {
 	background-color: #FFBDAB;
-}
-
-.border-cell {
-	background-color: green;
 }
 
 .swept-0 {

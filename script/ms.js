@@ -2,7 +2,6 @@
 // http://miphe.com
 
 // TODO
-// * Add automatic tile turnover when 0:s are adjecent 
 // * Add user controlled settings (board size, difficulty)
 // * Add game history, last games
 // * Add timer
@@ -30,23 +29,47 @@ Mi.mineSweeper = function() {
         },
 
         init: function() {
+            Mi.mineSweeper.clearControlPanel()
+            Mi.mineSweeper.unFreezeControlPanel()
 
-            // createBoard() takes two arguments:
-            // x, number of horizonal tiles
-            // y, number of vertical tiles
-
-            this.createBoard(4, 4)
-            this.applyGameEvents()
+            $('#control-panel').on('click', '#start-game', function() {
+                Mi.mineSweeper.freezeControlPanel()
+                Mi.mineSweeper.clearFeedback()
+                var settings = Mi.mineSweeper.readControlPanel()
+                Mi.mineSweeper.createBoard(settings.x, settings.y, settings.percentage)
+                Mi.mineSweeper.applyGameEvents()
+            })
         },
 
-        createBoard: function(x, y) {
+        readControlPanel: function() {
+            var cp = $('#control-panel')
+
+            return {
+                x: cp.find('.tiles-x').val() || 12,
+                y: cp.find('.tiles-y').val() || 12,
+                percentage: cp.find('.mine-percentage').val() || 25
+            }
+        },
+
+        clearControlPanel: function() {
+            $('#control-panel input[type=text]').val('');
+        },
+
+        freezeControlPanel: function() {
+            $('#control-panel input, button').prop('disabled', true);
+        },
+
+        unFreezeControlPanel: function() {
+            $('#control-panel input, button').prop('disabled', false);
+        },
+
+        createBoard: function(x, y, p) {
             var board = $('<table class="board box-2"></table>')
 
             for (var i = 0; i < y; i++) {
                 board.append(Mi.mineSweeper.boardRow(x))
             }
-
-            Mi.mineSweeper.populateBoard(board, Mi.mineSweeper.boardSettings(x*y))
+            Mi.mineSweeper.populateBoard(board, Math.round(x*y * p/100))
             Mi.mineSweeper.renderBoard(board)
         },
 
@@ -147,28 +170,6 @@ Mi.mineSweeper = function() {
             })
         },
 
-        boardSettings: function(tiles) {
-
-            // Supported settings:
-            // 8x8, 12x12, 16x16
-
-            var settings =  {
-                numberOfMinesByTiles: {
-                    64:  10, // 8x8     => 10 mines
-                    144: 20, // 12x12   => 20 mines
-                    256: 30  // 16x16   => 30 mines
-                }
-            }
-
-            if (settings.numberOfMinesByTiles[tiles]) {
-                return settings.numberOfMinesByTiles[tiles]
-            } else {
-                alert('Unsupported tile settings, this board will have 20% mines. Good luck!');
-                return tiles*0.2
-            }
-                
-        },
-
         sweepAdjecent: function(c) {
             var collection = Mi.mineSweeper.getAdjecentTiles(c)
             collection.removeClass('hidden')
@@ -227,6 +228,7 @@ Mi.mineSweeper = function() {
 
             // TODO: detemine more specifically why game ended.
             Mi.mineSweeper.notifyFail(1)
+            Mi.mineSweeper.unFreezeControlPanel()
         },
 
         notifySuccess: function(reason) {
@@ -241,6 +243,11 @@ Mi.mineSweeper = function() {
             $('.feedback-container').addClass('negative-message').append(markup).animate({
                 height: 'toggle'
             })
+        },
+
+        clearFeedback: function() {
+            $('.feedback-container').empty().attr('class', 'feedback-container is-hidden').hide()
+            console.log('cleared..')
         }
     }
 }()
