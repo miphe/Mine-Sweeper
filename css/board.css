@@ -42,6 +42,10 @@
 	cursor: pointer;
 }
 
+.board td.flagged {
+	background-color: aqua;
+}
+
 .board td.culprit {
 	background-color: #FFBDAB;
 }

@@ -2,7 +2,9 @@
 // http://miphe.com
 
 // TODO
-// * Add user controlled settings (board size, difficulty)
+// * Add 'restart' feature
+// * Add flagging feature (right click)
+// * Refactor control panel UI
 // * Add game history, last games
 // * Add timer
 // * Add timetracker (best score)
@@ -185,7 +187,7 @@ Mi.mineSweeper = function() {
         },
 
         sweepZero: function(c) {
-            $(c).addClass('swept-0')
+            $(c).addClass('swept-0').removeClass('flagged')
             var adjecentZeros = Mi.mineSweeper.sweepAdjecent(c)
 
             $.each(adjecentZeros, function(i, z) {
@@ -198,7 +200,7 @@ Mi.mineSweeper = function() {
         },
 
         applyGameEvents: function() {
-            $('.board').on('click', 'td.hidden', function() {
+            $('.board').on('click', 'td.hidden', function(e) {
                 var c = $(this)
                 var thisBoard = c.closest('.board')
                 c.removeClass('hidden')
@@ -211,6 +213,11 @@ Mi.mineSweeper = function() {
                 } else if (thisBoard.find('.hidden.safe').length < 1) { // All safe tiles swept?
                     Mi.mineSweeper.sweepingDone(thisBoard)
                 }
+            })
+
+            $('.board td.hidden').bind('contextmenu', function(){
+                Mi.mineSweeper.flagTile(this)
+                return false;
             })
         },
 
@@ -247,7 +254,10 @@ Mi.mineSweeper = function() {
 
         clearFeedback: function() {
             $('.feedback-container').empty().attr('class', 'feedback-container is-hidden').hide()
-            console.log('cleared..')
+        },
+
+        flagTile: function(c) {
+            $(c).toggleClass('flagged')
         }
     }
 }()
