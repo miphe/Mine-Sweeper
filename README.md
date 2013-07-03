@@ -14,7 +14,7 @@ Personal tiny project, writing Mine Sweeper in js.
 ### Bugs and TODOs
 
 **Control panel**
-- [ ] Add form styles
+- [] Add form styles
 - [ ] Fields should have tooltips or labels
 - [ ] When disabled, should have overlay saying 'game in progress'
 - [ ] Should have button 'give up'
