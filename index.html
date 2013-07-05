@@ -8,11 +8,13 @@
         <link rel="stylesheet" type="text/css" href="css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="css/typography.css" />
         <link rel="stylesheet" type="text/css" href="css/layout.css" />
+        <link rel="stylesheet" type="text/css" href="css/form.css" />
         <link rel="stylesheet" type="text/css" href="css/theme.css" />
         <link rel="stylesheet" type="text/css" href="css/board.css" />
 
         <!-- Scripts -->
         <script type="text/javascript" src="script/jquery.1.10.1.js"></script>
+        <script type="text/javascript" src="script/unrelated.js"></script>
         <script type="text/javascript" src="script/ms.js"></script>
     </head>
     <body>
@@ -21,8 +23,27 @@
                 <h1>Mine Sweeper, by André Drougge</h1>
             </header>
             <div id="control-panel" class="l-box box-2">
-                <input class="tiles-x" type="text" placeholder="Board size X" />
-                <input class="tiles-y" type="text" placeholder="Board size Y" />
+                <form class="l-1">
+                    <ul>
+                        <li>
+                            <div class="dt">
+                                <label for="size-x">Tiles in width: </label>
+                            </div>
+                            <div class="dd">
+                                <input id="size-x" class="tiles-x" type="text" placeholder="Between 8 and 23" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dt">
+                                <label for="size-x">Tiles in height: </label>
+                            </div>
+                            <div class="dd">
+                                <input id="size-y" class="tiles-x" type="text" placeholder="Between 8 and 23" />
+                            </div>
+                        </li>
+                    </ul>
+
+                </form>
                 <input class="mine-percentage" type="text" placeholder="% of mines" />
                 <label for="hardcore-mode">Hardcore (not yet supported)</label>
                 <input id="hardcore-mode" type="checkbox" />

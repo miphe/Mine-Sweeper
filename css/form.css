@@ -1,0 +1,29 @@
+
+form.l-1 li {
+	overflow: auto;
+	margin-bottom: 10px;
+}
+form.l-1 {}
+
+form.l-1 .dt,
+form.l-1 .dd {
+	float: left;
+}
+
+.dt {
+	width: 150px;
+	height: 25px;
+	line-height: 25px;
+}
+
+.dt label {
+}
+
+.dd {
+}
+
+form input {
+	height: 23px;
+	border: 1px solid #ddd;
+	padding: 0 6px;
+}

@@ -1,19 +1,7 @@
 // MineSweeper by André Drougge - andre.drougge@gmail.com
-// http://miphe.com
+// http://ms.miphe.com
 
-// TODO
-// * Add 'restart' feature
-// * Add flagging feature (right click)
-// * Refactor control panel UI
-// * Add game history, last games
-// * Add timer
-// * Add timetracker (best score)
-// * Add stress indicator (too long between clicks)
-// * Add hardcore mode
-// ** Mines blow if time between clicks aren't fast enough
-// ** When all safe zones are opened, do not notify, user needs to say 'ALL DONE' before game is over
-
-Mi = {}
+Mi = Mi || {}
 
 Mi.mineSweeper = function() {
     return {
@@ -263,5 +251,6 @@ Mi.mineSweeper = function() {
 }()
 
 $(document).ready( function() {
+    Mi.unrelated.init()
     Mi.mineSweeper.init()
 })
