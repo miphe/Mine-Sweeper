@@ -30,6 +30,9 @@ header, footer {
 
 .feedback-container {
 	margin-top: 20px;
+}
+
+.feedback-container p {
 	padding: 20px;
 }
 
@@ -45,4 +48,40 @@ header, footer {
 
 .feedback-container p {
 	margin: 0;
+}
+
+/* -------------------------------------------------------------------------*/
+/* Buttons/Links */
+
+.l-button {
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+.l-button.v-1 {
+	padding: 10px 14px;
+	font-size: 16px;
+}
+
+.l-button.t-1 {
+	background-color: #009900;
+	border: 1px solid #008000;
+	color: white;
+}
+
+.l-button.t-2 {
+	background-color: #884444;
+	border: 1px solid #773C3C;
+	color: white;
+}
+
+.l-button.is-disabled {
+	background-color: #dadada;
+	border: 1px solid #d1d1d1;
+	color: white;
+}
+
+#btn-container {
+	float: left;
+	width: 185px;
 }

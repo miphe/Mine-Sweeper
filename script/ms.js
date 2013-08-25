@@ -20,6 +20,7 @@ Mi.mineSweeper = function() {
 
         init: function() {
             Mi.mineSweeper.clearControlPanel()
+            Mi.mineSweeper.applyInputRestrictionEvents()
             Mi.mineSweeper.unFreezeControlPanel()
 
             $('#control-panel').on('click', '#start-game', function() {
@@ -28,6 +29,11 @@ Mi.mineSweeper = function() {
                 var settings = Mi.mineSweeper.readControlPanel()
                 Mi.mineSweeper.createBoard(settings.x, settings.y, settings.percentage)
                 Mi.mineSweeper.applyGameEvents()
+
+                // Not yet supported
+                //setTimeout( function() {
+                //    Mi.mineSweeper.showGiveUpButton()
+                //}, 1000)
             })
         },
 
@@ -46,11 +52,31 @@ Mi.mineSweeper = function() {
         },
 
         freezeControlPanel: function() {
-            $('#control-panel input, button').prop('disabled', true);
+            $('#control-panel input, button').prop('disabled', true)
+            $('#control-panel #start-game').addClass('is-disabled').text('Game in progress')
         },
 
         unFreezeControlPanel: function() {
-            $('#control-panel input, button').prop('disabled', false);
+            $('#control-panel input, button').prop('disabled', false)
+            $('#control-panel #start-game').removeClass('is-disabled').text('Start game')
+        },
+
+        applyInputRestrictionEvents: function() {
+            // Should only allow input between 8 and 23
+            $('#control-panel').on('blur', '.tiles', function() {
+                var v   = $(this).val()
+                var va  = v < 8 ? 8 : v
+                var val = va > 23 ? 23 : va
+                $(this).val(val)
+            })
+
+            // Should only allow difficulty percentage between 3 and 95
+            $('#control-panel').on('blur', '#mine-percentage', function() {
+                var v   = $(this).val()
+                var va  = v < 3 ? 3 : v
+                var val = va > 95 ? 95 : va
+                $(this).val(val)
+            })
         },
 
         createBoard: function(x, y, p) {
@@ -191,20 +217,27 @@ Mi.mineSweeper = function() {
             $('.board').on('click', 'td.hidden', function(e) {
                 var c = $(this)
                 var thisBoard = c.closest('.board')
-                c.removeClass('hidden')
+                c.removeClass('hidden flagged')
 
                 if (c.is('td:contains("0")')) {
                     Mi.mineSweeper.sweepZero(c)
                 } else if (c.is('.unsafe')) { // Hit a mine?
                     c.addClass('culprit')
-                    Mi.mineSweeper.failGame(thisBoard)
+                    setTimeout( function() {
+                        Mi.mineSweeper.failGame(thisBoard)
+                    }, 500)
+                    
                 } else if (thisBoard.find('.hidden.safe').length < 1) { // All safe tiles swept?
                     Mi.mineSweeper.sweepingDone(thisBoard)
                 }
             })
 
             $('.board td.hidden').bind('contextmenu', function(){
-                Mi.mineSweeper.flagTile(this)
+                console.log('Trying to flag..')
+                console.log(this)
+                if ($(this).is('.hidden'))
+                    Mi.mineSweeper.flagTile(this)
+
                 return false;
             })
         },
@@ -215,6 +248,7 @@ Mi.mineSweeper = function() {
 
             // TODO: detemine more specifically what happened.
             Mi.mineSweeper.notifySuccess(1)
+            Mi.mineSweeper.unFreezeControlPanel()
         },
 
         failGame: function(board) {
@@ -235,9 +269,14 @@ Mi.mineSweeper = function() {
 
         notifyFail: function(reason) {
             var markup = '<p>' + Mi.mineSweeper.failureCode(reason) + '</p>'
-            $('.feedback-container').addClass('negative-message').append(markup).animate({
-                height: 'toggle'
-            })
+            $('.feedback-container')
+                .addClass('negative-message')
+                .removeClass('is-hidden')
+                .append(markup)
+                .animate({
+                    height: 'toggle'
+                }
+            )
         },
 
         clearFeedback: function() {
@@ -246,6 +285,17 @@ Mi.mineSweeper = function() {
 
         flagTile: function(c) {
             $(c).toggleClass('flagged')
+        },
+
+        showGiveUpButton: function() {
+            Mi.mineSweeper.giveUpButton().appendTo('#btn-container').animate({
+                opacity: 'toggle'
+            }, 3000)
+        },
+
+        giveUpButton: function() {
+            var btn = '<a id="give-up" href="#" class="l-button v-1 t-2" style="display: none;">Give up</a>'
+            return $(btn)
         }
     }
 }()

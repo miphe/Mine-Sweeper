@@ -1,9 +1,15 @@
+form.l-1 {
+	overflow: hidden;
+}
 
 form.l-1 li {
-	overflow: auto;
+	overflow: hidden;
 	margin-bottom: 10px;
 }
-form.l-1 {}
+form.l-1 .col {
+	float: left;
+	width: 370px;
+}
 
 form.l-1 .dt,
 form.l-1 .dd {

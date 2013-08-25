@@ -10,7 +10,7 @@ Mi.unrelated = function() {
         },
 
         applyFormEvents: function() {
-			$('form') // etc..
+			// Tooltips etc..
         }
     }
 }()

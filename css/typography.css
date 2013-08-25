@@ -12,7 +12,7 @@
 	Base Type
 */
 html {
-	font: normal 112.5%/1.65 serif;
+	font: normal 100% serif;
 }
 
 body {
@@ -96,14 +96,14 @@ xmp {
 	Paragraphs
 */
 
-p {
-	font-size: 1.2em;
-	margin: 0 0 1.5em;
+p, li {
+	font-size: 12px;
+	margin: 0 0 15px;
 }
 
 p + p {
-	text-indent: 1.5em;
-	margin-top: -1.5em;
+	text-indent: 15px;
+	margin-top: -15px;
 }
 
 /*

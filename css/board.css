@@ -42,8 +42,8 @@
 	cursor: pointer;
 }
 
-.board td.flagged {
-	background-color: aqua;
+.board td.hidden.flagged {
+	background-image: url(../img/flagged.png);
 }
 
 .board td.culprit {
@@ -52,4 +52,8 @@
 
 .swept-0 {
 	background-color: beige;
+}
+
+#start-game {
+	float: left;
 }

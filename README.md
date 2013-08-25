@@ -1,7 +1,7 @@
 Mine Sweeper
 ===========
 
-Personal tiny project, writing Mine Sweeper in js.
+Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](https://ms.miphe.com)
 
 ### How to play
 
@@ -14,29 +14,18 @@ Personal tiny project, writing Mine Sweeper in js.
 ### Bugs and TODOs
 
 **Control panel**
-- [] Add form styles
-- [ ] Fields should have tooltips or labels
-- [ ] When disabled, should have overlay saying 'game in progress'
-- [ ] Should have button 'give up'
-
-**Gameplay**
-- [ ] Add 
-- [ ] Add delay between (Hit mine => Reveal board => Show message, Finished game => Show message)
-
-**Flagging**
-- [ ] Fix bug about flagging mines
-- [ ] Fix bug about removing flag when tile is swept
+- Fields should have tooltips or labels
+- Should have button 'give up'
 
 **Graphics**
-- [ ] Should show flag image
-- [ ] Should show mine image
+- Should show mine image
 
 **Hardcore mode**
-- [ ] Add keyboard shortcut to 'commit game result' game instead of mouse click
+- Add keyboard shortcut to 'commit game result' game instead of mouse click
 
 **Log**
-- [ ] Add log (Game type (normal, hardcore), Game finish time, Game result)
+- Add log (Game type (normal, hardcore), Game finish time, Game result)
 
 **Timer**
-- [ ] Add timer (Game start, until game end)
-- [ ] Add stress indicator (too long between clicks)
+- Add timer (Game start, until game end - hardcore mode)
+- Add stress indicator (too long between clicks - hardcore mode)
