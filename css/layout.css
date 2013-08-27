@@ -12,8 +12,12 @@
 	margin: 0 auto;
 }
 
-header, footer {
+header {
 	height: 60px;
+}
+
+footer.l-box {
+	padding-bottom: 8px;
 }
 
 /* -------------------------------------------------------------------------*/

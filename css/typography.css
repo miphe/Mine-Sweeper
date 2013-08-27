@@ -68,6 +68,10 @@ h6 {
 	margin-bottom: 1.65rem;
 }
 
+footer a {
+	color: #bbb;
+}
+
 /*
 	Hyphens
 */
@@ -101,9 +105,8 @@ p, li {
 	margin: 0 0 15px;
 }
 
-p + p {
-	text-indent: 15px;
-	margin-top: -15px;
+p {
+	margin-bottom: 10px;
 }
 
 /*
