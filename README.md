@@ -1,7 +1,7 @@
 Mine Sweeper
 ===========
 
-Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](https://ms.miphe.com)
+Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](http://ms.miphe.com)
 
 ### How to play
 
@@ -15,17 +15,12 @@ Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](
 
 **Control panel**
 - Fields should have tooltips or labels
-- Should have button 'give up'
-
-**Graphics**
-- Should show mine image
 
 **Hardcore mode**
+- Add timer (Game start, until game end)
+- Add stress indicator (too long between clicks)
 - Add keyboard shortcut to 'commit game result' game instead of mouse click
+- Add information about 'How to play hardcore'
 
 **Log**
-- Add log (Game type (normal, hardcore), Game finish time, Game result)
-
-**Timer**
-- Add timer (Game start, until game end - hardcore mode)
-- Add stress indicator (too long between clicks - hardcore mode)
+- Add log, scoreboard (Game type (normal, hardcore), Game finish time, Game result)

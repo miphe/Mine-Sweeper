@@ -50,12 +50,18 @@ header, footer {
 	margin: 0;
 }
 
+#control-panel {
+	padding-bottom: 10px;
+}
+
 /* -------------------------------------------------------------------------*/
 /* Buttons/Links */
 
 .l-button {
+	display: inline-block;
 	cursor: pointer;
 	border-radius: 2px;
+	text-decoration: none;
 }
 
 .l-button.v-1 {

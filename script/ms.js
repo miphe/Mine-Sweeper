@@ -8,7 +8,8 @@ Mi.mineSweeper = function() {
         failureCode: function(m) {
             return {
                 1: 'You hit a mine! Game over, get to the hospital and patch yourself up.',
-                2: 'Time\'s up! You failed to sweep all mines on time.'
+                2: 'Time\'s up! You failed to sweep all mines on time.',
+                3: 'You gave up! Try again, don\'t be discouraged.'
             }[m]
         },
 
@@ -30,10 +31,10 @@ Mi.mineSweeper = function() {
                 Mi.mineSweeper.createBoard(settings.x, settings.y, settings.percentage)
                 Mi.mineSweeper.applyGameEvents()
 
-                // Not yet supported
-                //setTimeout( function() {
-                //    Mi.mineSweeper.showGiveUpButton()
-                //}, 1000)
+                setTimeout( function() {
+                    Mi.mineSweeper.showGiveUpButton()
+                    Mi.mineSweeper.applyGiveUpEvents()
+                }, 3000)
             })
         },
 
@@ -233,8 +234,6 @@ Mi.mineSweeper = function() {
             })
 
             $('.board td.hidden').bind('contextmenu', function(){
-                console.log('Trying to flag..')
-                console.log(this)
                 if ($(this).is('.hidden'))
                     Mi.mineSweeper.flagTile(this)
 
@@ -246,17 +245,18 @@ Mi.mineSweeper = function() {
             var allCells = board.find('td')
             allCells.removeClass('hidden')
 
-            // TODO: detemine more specifically what happened.
             Mi.mineSweeper.notifySuccess(1)
             Mi.mineSweeper.unFreezeControlPanel()
         },
 
-        failGame: function(board) {
+        failGame: function(board, reason) {
             var allCells = board.find('td')
             allCells.removeClass('hidden')
+            reason = reason || 1
 
-            // TODO: detemine more specifically why game ended.
-            Mi.mineSweeper.notifyFail(1)
+            Mi.mineSweeper.clearFeedback()
+            Mi.mineSweeper.notifyFail(reason)
+            Mi.mineSweeper.hideGiveUpButton()
             Mi.mineSweeper.unFreezeControlPanel()
         },
 
@@ -271,7 +271,6 @@ Mi.mineSweeper = function() {
             var markup = '<p>' + Mi.mineSweeper.failureCode(reason) + '</p>'
             $('.feedback-container')
                 .addClass('negative-message')
-                .removeClass('is-hidden')
                 .append(markup)
                 .animate({
                     height: 'toggle'
@@ -280,7 +279,7 @@ Mi.mineSweeper = function() {
         },
 
         clearFeedback: function() {
-            $('.feedback-container').empty().attr('class', 'feedback-container is-hidden').hide()
+            $('.feedback-container').empty().attr('class', 'feedback-container').hide()
         },
 
         flagTile: function(c) {
@@ -288,14 +287,27 @@ Mi.mineSweeper = function() {
         },
 
         showGiveUpButton: function() {
-            Mi.mineSweeper.giveUpButton().appendTo('#btn-container').animate({
+            Mi.mineSweeper.giveUpButton().appendTo('#button-row-2').animate({
                 opacity: 'toggle'
-            }, 3000)
+            }, 2000)
+        },
+
+        hideGiveUpButton: function() {
+            $('#give-up').remove()
         },
 
         giveUpButton: function() {
-            var btn = '<a id="give-up" href="#" class="l-button v-1 t-2" style="display: none;">Give up</a>'
+            var btn = '<a id="give-up" href="#" class="l-button v-1 t-2" style="display: none;">Give up?</a>'
             return $(btn)
+        },
+
+        applyGiveUpEvents: function() {
+            $('#give-up').on('click', function() {
+                // TODO: Grabbing the board here disables us
+                // from having several boards in the future.
+                // Refactor if thats something we need.
+                Mi.mineSweeper.failGame($('.board'), 3)
+            })
         }
     }
 }()
