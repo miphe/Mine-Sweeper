@@ -13,14 +13,16 @@ Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](
 
 ### Bugs and TODOs
 
+**Known bugs**
+- 'Give up' button may show up after game ended (refactor endGame event)
+
 **Control panel**
 - Fields should have tooltips or labels
 
 **Hardcore mode**
-- Add timer (Game start, until game end)
 - Add stress indicator (too long between clicks)
 - Add keyboard shortcut to 'commit game result' game instead of mouse click
 - Add information about 'How to play hardcore'
 
 **Log**
-- Add log, scoreboard (Game type (normal, hardcore), Game finish time, Game result)
+- Add scoreboard (Game type (normal, hardcore), Game finish time, Game result)

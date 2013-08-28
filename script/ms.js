@@ -24,12 +24,17 @@ Mi.mineSweeper = function() {
             Mi.mineSweeper.applyInputRestrictionEvents()
             Mi.mineSweeper.unFreezeControlPanel()
 
+            endGame = $.Event('endGame')
+
             $('#control-panel').on('click', '#start-game', function() {
                 Mi.mineSweeper.freezeControlPanel()
                 Mi.mineSweeper.clearFeedback()
                 var settings = Mi.mineSweeper.readControlPanel()
                 Mi.mineSweeper.createBoard(settings.x, settings.y, settings.percentage)
                 Mi.mineSweeper.applyGameEvents()
+
+                if(settings.hc)
+                    Mi.mineSweeper.hc.init()
 
                 setTimeout( function() {
                     Mi.mineSweeper.showGiveUpButton()
@@ -44,7 +49,8 @@ Mi.mineSweeper = function() {
             return {
                 x: cp.find('.tiles-x').val() || 12,
                 y: cp.find('.tiles-y').val() || 12,
-                percentage: cp.find('.mine-percentage').val() || 25
+                percentage: cp.find('.mine-percentage').val() || 25,
+                hc: cp.find('#hardcore-mode').is(':checked') || false
             }
         },
 
@@ -245,6 +251,7 @@ Mi.mineSweeper = function() {
             var allCells = board.find('td')
             allCells.removeClass('hidden')
 
+            $(document).trigger('endGame')
             Mi.mineSweeper.notifySuccess(1)
             Mi.mineSweeper.unFreezeControlPanel()
         },
@@ -254,6 +261,7 @@ Mi.mineSweeper = function() {
             allCells.removeClass('hidden')
             reason = reason || 1
 
+            $(document).trigger('endGame')
             Mi.mineSweeper.clearFeedback()
             Mi.mineSweeper.notifyFail(reason)
             Mi.mineSweeper.hideGiveUpButton()

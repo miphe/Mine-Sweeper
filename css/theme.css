@@ -20,3 +20,41 @@
 .box-raw {
 	border: 1px solid #efefef;
 }
+
+/* Hardcore mode */
+
+#hardcore-panel {
+	position: relative;
+}
+
+#log-list li {
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 0;
+}
+
+#log-list li p {
+	margin-bottom: 0;
+	line-height: 15px;
+}
+
+#log-list .rec {
+	width: 25px;
+}
+
+#log-list .spent-time {
+}
+
+#rec {
+	display: block;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    background-color: #ddd;
+}
+
+#rec.on {
+	background-color: red;
+}

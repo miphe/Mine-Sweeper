@@ -16,6 +16,7 @@
         <script type="text/javascript" src="script/jquery.1.10.1.js"></script>
         <script type="text/javascript" src="script/unrelated.js"></script>
         <script type="text/javascript" src="script/ms.js"></script>
+        <script type="text/javascript" src="script/ms.hardcore.js"></script>
     </head>
     <body>
         <div id="page">
@@ -52,12 +53,12 @@
                                 <input id="mine-percentage" class="mine-percentage" type="text" placeholder="% of mines" />
                             </div>
                         </li>
-                        <li class="is-hidden">
+                        <li>
                             <div class="dt">
-                                <label for="hardcore-mode">Hardcore (not yet supported)</label>
+                                <label for="hardcore-mode">Hardcore</label>
                             </div>
                             <div class="dd">
-                                <input id="hardcore-mode" type="checkbox" disabled="disabled" />
+                                <input id="hardcore-mode" type="checkbox" />
                             </div>
                         </li>
                     </ul>
@@ -69,6 +70,12 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div id="hardcore-panel" class="is-hidden l-box box-raw">
+                <ul id="log-list" class="cf">
+                    <li class="rec"><span id="rec"></span></li>
+                    <li class="spent-time"><p id="spent-time"></p></li>
+                </ul>
             </div>
             <div class="feedback-container is-hidden"></div>
             <div id="content" class="l-box box-raw">
