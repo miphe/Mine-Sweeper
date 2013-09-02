@@ -19,14 +19,18 @@ Mi.mineSweeper = function() {
             }[m]
         },
 
+        gameOn: null,
+
         init: function() {
             Mi.mineSweeper.clearControlPanel()
             Mi.mineSweeper.applyInputRestrictionEvents()
             Mi.mineSweeper.unFreezeControlPanel()
+            Mi.mineSweeper.applyGameEndEvents()
 
             endGame = $.Event('endGame')
 
             $('#control-panel').on('click', '#start-game', function() {
+                Mi.mineSweeper.gameOn = true
                 Mi.mineSweeper.freezeControlPanel()
                 Mi.mineSweeper.clearFeedback()
                 var settings = Mi.mineSweeper.readControlPanel()
@@ -37,8 +41,10 @@ Mi.mineSweeper = function() {
                     Mi.mineSweeper.hc.init()
 
                 setTimeout( function() {
-                    Mi.mineSweeper.showGiveUpButton()
-                    Mi.mineSweeper.applyGiveUpEvents()
+                    if(Mi.mineSweeper.gameOn) {
+                        Mi.mineSweeper.showGiveUpButton()
+                        Mi.mineSweeper.applyGiveUpEvents()
+                    }
                 }, 3000)
             })
         },
@@ -244,6 +250,12 @@ Mi.mineSweeper = function() {
                     Mi.mineSweeper.flagTile(this)
 
                 return false;
+            })
+        },
+
+        applyGameEndEvents: function() {
+            $(document).on('endGame', function(e) {
+                Mi.mineSweeper.gameOn = false
             })
         },
 
