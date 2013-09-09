@@ -9,7 +9,8 @@ Mi.mineSweeper = function() {
             return {
                 1: 'You hit a mine! Game over, get to the hospital and patch yourself up.',
                 2: 'Time\'s up! You failed to sweep all mines on time.',
-                3: 'You gave up! Try again, don\'t be discouraged.'
+                3: 'You gave up! Try again, don\'t be discouraged.',
+                4: 'BOOM! You took too long between clicks, the mines got unstable and blew up.'
             }[m]
         },
 
@@ -27,6 +28,7 @@ Mi.mineSweeper = function() {
             Mi.mineSweeper.unFreezeControlPanel()
             Mi.mineSweeper.applyGameEndEvents()
 
+            sweep = $.Event('sweep')
             endGame = $.Event('endGame')
 
             $('#control-panel').on('click', '#start-game', function() {
@@ -40,12 +42,10 @@ Mi.mineSweeper = function() {
                 if(settings.hc)
                     Mi.mineSweeper.hc.init()
 
-                setTimeout( function() {
-                    if(Mi.mineSweeper.gameOn) {
-                        Mi.mineSweeper.showGiveUpButton()
-                        Mi.mineSweeper.applyGiveUpEvents()
-                    }
-                }, 3000)
+                if(Mi.mineSweeper.gameOn) {
+                    Mi.mineSweeper.showGiveUpButton()
+                    Mi.mineSweeper.applyGiveUpEvents()
+                }
             })
         },
 
@@ -228,6 +228,11 @@ Mi.mineSweeper = function() {
 
         applyGameEvents: function() {
             $('.board').on('click', 'td.hidden', function(e) {
+
+                if (!Mi.mineSweeper.gameOn)
+                    return
+
+                $(document).trigger('sweep')
                 var c = $(this)
                 var thisBoard = c.closest('.board')
                 c.removeClass('hidden flagged')
@@ -256,6 +261,7 @@ Mi.mineSweeper = function() {
         applyGameEndEvents: function() {
             $(document).on('endGame', function(e) {
                 Mi.mineSweeper.gameOn = false
+                Mi.mineSweeper.hideGiveUpButton()
             })
         },
 
@@ -276,7 +282,6 @@ Mi.mineSweeper = function() {
             $(document).trigger('endGame')
             Mi.mineSweeper.clearFeedback()
             Mi.mineSweeper.notifyFail(reason)
-            Mi.mineSweeper.hideGiveUpButton()
             Mi.mineSweeper.unFreezeControlPanel()
         },
 

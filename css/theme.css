@@ -58,3 +58,8 @@
 #rec.on {
 	background-color: red;
 }
+
+.sweep-time {
+	font-weight: bold;
+	color: red;
+}

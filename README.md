@@ -19,8 +19,11 @@ Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](
 **Control panel**
 - Fields should have tooltips or labels
 
+**TODO**
+- Make a nicer stress indicator
+
 **Hardcore mode**
-- Add stress indicator (too long between clicks)
+- Add non-automatic game-finished (success) for HC mode
 - Add keyboard shortcut to 'commit game result' game instead of mouse click
 - Add information about 'How to play hardcore'
 
