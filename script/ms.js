@@ -226,6 +226,10 @@ Mi.mineSweeper = function() {
             })
         },
 
+        noMinesLeft: function(board) {
+            return board.find('.hidden.safe').length < 1
+        },
+
         applyGameEvents: function() {
             $('.board').on('click', 'td.hidden', function(e) {
 
@@ -245,14 +249,21 @@ Mi.mineSweeper = function() {
                         Mi.mineSweeper.failGame(thisBoard)
                     }, 500)
                     
-                } else if (thisBoard.find('.hidden.safe').length < 1) { // All safe tiles swept?
+                } else if (Mi.mineSweeper.noMinesLeft(thisBoard)) { // All safe tiles swept?
                     Mi.mineSweeper.sweepingDone(thisBoard)
                 }
             })
 
             $('.board td.hidden').bind('contextmenu', function(){
-                if ($(this).is('.hidden'))
+                var t = $(this)
+                var thisBoard = t.closest('.board')
+                if (t.is('.hidden')) {
+                    // Checks if there are any more hidden mines
+                    if (Mi.mineSweeper.noMinesLeft(thisBoard))
+                        Mi.mineSweeper.sweepingDone(thisBoard)
+
                     Mi.mineSweeper.flagTile(this)
+                }
 
                 return false;
             })
@@ -266,8 +277,8 @@ Mi.mineSweeper = function() {
         },
 
         sweepingDone: function(board) {
-            var allCells = board.find('td')
-            allCells.removeClass('hidden')
+            var allHiddenCells = board.find('td.hidden')
+            allHiddenCells.addClass('flagged')
 
             $(document).trigger('endGame')
             Mi.mineSweeper.notifySuccess(1)
