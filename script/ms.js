@@ -248,7 +248,7 @@ Mi.mineSweeper = function() {
                     setTimeout( function() {
                         Mi.mineSweeper.failGame(thisBoard)
                     }, 500)
-                    
+
                 } else if (Mi.mineSweeper.noMinesLeft(thisBoard)) { // All safe tiles swept?
                     Mi.mineSweeper.sweepingDone(thisBoard)
                 }
@@ -338,7 +338,8 @@ Mi.mineSweeper = function() {
         },
 
         applyGiveUpEvents: function() {
-            $('#give-up').on('click', function() {
+            $('#give-up').on('click', function(e) {
+                e.preventDefault()
                 // TODO: Grabbing the board here disables us
                 // from having several boards in the future.
                 // Refactor if thats something we need.

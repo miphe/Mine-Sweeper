@@ -22,7 +22,7 @@ body {
 	hyphens: auto;
 	word-wrap: break-word;
 	color: #444444;
-	font-family: "lucida grande" helvetica sans-serif;
+	font-family: 'Arvo', arial, sans-serif;
 }
 
 h1,
@@ -101,12 +101,12 @@ xmp {
 */
 
 p, li {
-	font-size: 12px;
-	margin: 0 0 15px;
+	font-size: 1.1em;
+	margin: 0 0 1.3em;
 }
 
 p {
-	margin-bottom: 10px;
+	margin-bottom: 0.9em;
 }
 
 /*

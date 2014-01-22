@@ -11,16 +11,7 @@ Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](
 - Uncover an empty square, and you keep playing.
 - Uncover a number, and it tells you how many mines lay hidden in the eight surrounding squares—information you use to deduce which nearby squares are safe to click.
 
-### Bugs and TODOs
-
-**Known bugs**
-- 'Give up' button may show up after game ended (refactor endGame event)
-
-**Control panel**
-- Fields should have tooltips or labels
-
-**TODO**
-- Make a nicer stress indicator
+### Progress & Notes
 
 **Hardcore mode**
 - Add non-automatic game-finished (success) for HC mode
@@ -29,3 +20,6 @@ Personal tiny project, writing Mine Sweeper in js. Try it out on [ms.miphe.com](
 
 **Log**
 - Add scoreboard (Game type (normal, hardcore), Game finish time, Game result)
+
+**Known bugs**
+- 'Give up' button may show up after game ended (refactor endGame event)
